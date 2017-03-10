@@ -1,0 +1,18 @@
+1.
+a. dian adalah orang
+b. atos adalah merek mobil
+c. dian menyukai atoz
+d. mobil atoz dijual
+e. x dapat membeli y jika x adalah orang dan y adalah mobil dan x menyukai y dan y dijual
+f. semua orang suka apa
+
+2.
+a. hobi(ricky,catur)
+b. malas(embang)
+c. orang(yusida,vegetarian)
+d. pandai(kusdiar,gitar)
+e. punya(sadek,mobil),warna(mobil,merah),merk(mobil,BMW)
+f. pemain(awan,piano),berasal(awan,pontianak),besuku(awan,jawa)
+g. baik(orang):-sifat(orang,penyayang);sifat(orang,dermawan)
+h. pintar(orang):-nilai(matematika,tinggi);nilai(IPA,nilai);nilai(IPS,nilai)
+i. mati(_)

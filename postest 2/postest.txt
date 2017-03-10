@@ -1,0 +1,7 @@
+keyword di visual prolog
+1. open = digunakan untul memperluas visibilitas ruang lingkup kelas
+2. constants = digunakan untuk menandai bagian dari kode yang mendefinisikan beberapa nilai yang umum digunakan dalam kode program.
+3. domains = digunakan untuk menandai bagian menyatakan domain yang akan digunakan dalam kode 
+4. class facts = menunjuk bagian, yang menyatakan fakta-fakta yang akan digunakan nanti dalam kode program.
+5. class predicates = berisi deklarasi predikat yang akan kemudian didefinisikan dalam bagian klausa kode.
+6. clauses = Ini berisi definisi sebenarnya dari predikat sebelumnya dinyatakan. 
