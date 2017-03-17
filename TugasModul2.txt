@@ -9,10 +9,11 @@ f. semua orang suka apa
 2.
 a. hobi(ricky,catur)
 b. malas(embang)
-c. orang(yusida,vegetarian)
+c. vegetarian(yusida)
 d. pandai(kusdiar,gitar)
-e. punya(sadek,mobil),warna(mobil,merah),merk(mobil,BMW)
-f. pemain(awan,piano),berasal(awan,pontianak),besuku(awan,jawa)
-g. baik(orang):-sifat(orang,penyayang);sifat(orang,dermawan)
-h. pintar(orang):-nilai(matematika,tinggi);nilai(IPA,nilai);nilai(IPS,nilai)
-i. mati(_)
+e. punya(sadek,mobil),warna(mobil,merah),merk(mobil,BMW). this is true---->mobil(merah,sadek,bmw)
+f. pemain(awan,piano),berasal(awan,pontianak),besuku(awan,jawa) true---> pemain(awan,piano,pontianak,jawa)
+g. baik(orang):-sifat(orang,penyayang),sifat(orang,dermawan) truee--->baik(x):-penyayang(x),dermawan(x). orang=x;
+h. pintar(orang):-nilai(matematika,tinggi);nilai(IPA,nilai);nilai(IPS,nilai) true---> pintar(x):-nilaitinggi(x,metematika);nilaitinggi(x,IPA);nilaitinggi(x,IPS).
+i. pasti(X,mati);
+pastimati(orang);
