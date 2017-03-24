@@ -1,0 +1,52 @@
+	
+predicates
+	  buy_car(symbol,symbol) - determ (i,o)
+	  car(symbol,symbol,integer) - nondeterm (i,o,o)
+	  colors(symbol,symbol) - nondeterm (i,i)
+	
+
+	clauses
+	  buy_car(Model,Color):-
+		car(Model,Color,Price),
+		colors(Color,sexy),!,
+		Price > 25000.
+	
+
+	  car(maserati,green,25000).
+	  car(corvette,black,27000).
+	  car(corvette,red,26000).
+	  car(porsche,red,24000).
+	
+
+	  colors(red,sexy).
+	  colors(black,mean).
+	  colors(green,preppy).
+	
+
+	goal
+	  buy_car(corvette,Warna).
+	
+
+	Penjelasan Proses Backtracking:
+
+	Rules untuk mencari mobil yg akan dibeli
+1. goal mencari warna mobil corvete yg dapat dibeli
+2. aturanya beli mobil, mobil harus punya model, warna, dan harga.
+3. warna harus masuk kategori warna sexy dan harga mobil > 25000
+------
+
+	Urutan pengecekan fakta
+	
+	a. car(maserati,green,25000).
+	tidak memenuhi syarat karena model mobil harus corvete, karena tidak terpenuhi dilakukan lacak balik
+		
+	b. car(corvette,black,24000).
+	model corvete memenuhi syarat tapi warnanya bukan merah yg dicari warna sexy, karena warna sexy adalah merah, sedangkan pada fakta ini warnanya hitam, karena tidak terpenuhi dilakukan lacak balik
+
+	c. car(corvette,red,26000).
+	semua rules awal terpenuhi : memiliki model, warna dan harga. Solusi sampai disini maka solusi ditemukan.
+				
+	d. Cut(!) 
+	pada rule beli_mobil berarti corvette yang mempunyai warna seksi kalau harga lebih dari 25000 maka tidak usah mencari mobil lainnya lagi. mungkin :v				
+	
+

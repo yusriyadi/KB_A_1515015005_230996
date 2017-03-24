@@ -1,0 +1,78 @@
+DOMAINS
+	nama, jender, pekerjaan, benda, alasan, zat = symbol
+	umur = integer
+
+PREDICATES
+	nondeterm orang (nama,umur,jender,pekerjaan)
+	nondeterm selingkuh (nama,nama)
+	terbunuh_dengan (nama,benda)
+	terbunuh (nama)
+	nondeterm pembunuh (nama)
+	motif (alasan)
+	ternodai (nama,zat)
+	milik (nama,benda)
+	nondeterm cara_kerja_mirip (benda,benda)
+	nondeterm kemungkinan_milik (nama,benda)
+	nondeterm dicurigai (nama)
+ /*pada bagian predicates ini di deklarasikan predikat-predikat dan tipe-tipe argumennya yang nantinya akan dipakai pada bagian clauses*/
+
+CLAUSES
+	orang (budi,55,m,tukang_kayu).
+	orang (aldi,25,m,pemain_sepak_bola).  /*disini dideklarasikan fakta orang-orang dan pekerjaannya yang salah satunya merupakan pelaku pembunuhan*/
+	orang (aldi,25,m,tukang_jagal).
+	orang (joni,25,m,pencopet).
+	selingkuh (ina,joni).
+	selingkuh (ina,budi). /*dideklarasikan pula fakta perselingkuhan yang yang dapat menjadi petunjuk pelaku pembunuhan*/
+	selingkuh (siti,joni).
+ 	terbunuh_dengan (siti,pentungan). /*pada fakta ini diketahui bahwa yang menjadi korban pembunuhan adalah siti dan dia terbunuh dengan pentungan*/
+	terbunuh (siti).
+	 motif (uang).
+	motif (cemburu). /*disini dideklarasikan fakta mengenai kemungkinan-kemungkinan motif dari pembunuhan yang terjadi*/
+	motif (dendam).
+ 	ternodai (budi,darah).
+	ternodai (siti,darah).
+	ternodai (aldi,lumpur). /*disini dideklarasikan fakta mengenai noda yang terdapat pada orang tertentu, noda yang sama dapat memberikan sebuah petunjuk*/
+	ternodai (joni,coklat).
+	ternodai (ina,coklat).
+	milik (budi,kaki_palsu). /*disini terdapat fakta barang berupa pistol dan kaki palsu beserta pemiliknya*/
+	milik (joni,pistol).
+ 	cara_kerja_mirip (kaki_palsu,pentungan). /*dideklarasikan fakta beberapa benda yang mirip cara kerjanya yang bisa menjadi petunjuk siapa pembunuhnya*/
+	cara_kerja_mirip (balok,pentungan).
+	cara_kerja_mirip (gunting,pisau).
+	cara_kerja_mirip (sepatu_bola,pentungan).
+	 kemungkinan_milik (X,sepatu_bola):- /*disini dijelaskan aturan sepatu bola hanya dimiliki oleh pemain bola dan gunting dimiliki oleh pekerja salon*/
+	orang (X,_,_,pemanin_bola). 
+	kemungkinan_milik (X,gunting):-
+	orang (X,_,_,pekerja_salon).
+	
+kemungkinan_milik (X,Benda):- /*dijelaskan pula orang kemungkinan memiliki suatu benda jika orang tersebut memiliki benda*/
+	milik (X,Benda).
+	
+dicurigai (X):-
+	terbunuh_dengan (siti,Senjata), /*disini kita mencari kemungkinan pemilik dari suatu benda yang mana benda tersebut cara kerjanya mirip dengan benda yang dipakai untuk membunuh siti*/
+	cara_kerja_mirip (Benda,Senjata), 
+	kemungkinan_milik (X,Benda). /*pada aturan akan dicurigai budi adalah pembunuhnya*/
+	
+dicurigai (X):-
+	motif (cemburu), /*disini pembunuh atau orang yang dicurigai akan dicari berdasarkan motif cemburu yang berkelamin pria*/
+	orang (X,_,m,_),
+	selingkuh (siti,X). /*pada aturan ini akan dicurigai joni adalah pembunuhnya*/
+ dicurigai (X):-
+	motif (cemburu),  /*disini pembunuh atau orang yang dicurigai akan dicari berdasarkan motif cemburu yang berkelamin wanita*/
+	orang (X,_,f,_),
+	selingkuh (X,Lakilaki),
+	selingkuh (siti,Lakilaki). /*pada aturan ini akan dicurigai ina adalah pembunuhnya*/
+ dicurigai (X):-
+	motif (uang), /*disini pembunuh atau orang yang dicurigai akan dicari berdasarkan motif uang*/
+	orang (X,_,_,pencopet). /*pada aturan ini akan dicurigai joni adalah pembunuhnya*/
+ pembunuh (Pembunuh):- /*pada aturan terakhir ini akan didapatkan pembunuh yang sebenarnya*/
+	orang (Pembunuh,_,_,_), /*aturan pertama yaitu pembunuhnya adalah orang*/
+	terbunuh (Terbunuh), /*harus ada korban yang terbubuh*/
+	Terbunuh <> Pembunuh, /*pembunuh tidak sama dengan orang yang terbunuh atau kata lainnya bukan merupakan bunuh diri*/
+	dicurigai (Pembunuh), /*orang itu dinyatakan sebagai pembunuh jika dia telah dicurigai sebagai pembunuh*/
+	ternodai (Pembunuh,Zat),
+	ternodai (Terbunuh,Zat). /*terakhir pembunuh dan yang terbunuh memiliki noda zat yang sama*/
+	/*dan semua aturan tersebut akan mengarah pada budi sebagai pembunuhnya*/
+	
+GOAL
+pembunuh (X). /*goal dari program ini adalah budi yang mana merupakan pembunuhnya*/
